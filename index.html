@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Loganathan | Java Developer Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+    :root{
+        --bg-main: #f4f7fb;
+        --bg-section: #eef2f7;
+        --card-bg: #ffffff;
+        --primary: #0d6efd;
+        --text-main: #0f172a;
+        --text-muted: #6b7280;
+        --border-soft: #e5e7eb;
+    }
+
+    body{
+        background: linear-gradient(180deg, #f8fbff 0%, #eef3f9 100%);
+        color: var(--text-main);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    /* Navbar */
+    .navbar{
+        backdrop-filter: blur(8px);
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .nav-link{
+        font-weight: 500;
+        color: #1f2937 !important;
+    }
+
+    .nav-link:hover{
+        color: var(--primary) !important;
+    }
+
+    /* Section layout */
+    section{
+        padding: 64px 0;
+        scroll-margin-top: 90px;
+    }
+
+    section:nth-of-type(even){
+        background-color: var(--bg-section);
+    }
+
+    /* Titles */
+    .section-title{
+        font-size: 1.6rem;
+        font-weight: 700;
+        border-left: 5px solid var(--primary);
+        padding-left: 14px;
+        margin-bottom: 28px;
+    }
+
+    /* Cards */
+    .card{
+        background: var(--card-bg);
+        border: 1px solid var(--border-soft);
+        border-radius: 18px;
+        padding: 24px;
+        transition: all 0.35s ease;
+    }
+
+    .card:hover{
+        transform: translateY(-6px);
+        box-shadow: 0 20px 35px rgba(15, 23, 42, 0.12);
+    }
+
+    /* Icons */
+    .icon{
+        color: var(--primary);
+        margin-right: 8px;
+    }
+
+    /* Profile image */
+    .profile-pic{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid #ffffff;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    /* Progress bars */
+    .progress{
+        height: 12px;
+        border-radius: 10px;
+        background-color: #e5e7eb;
+        overflow: hidden;
+    }
+
+    .progress-bar{
+        font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn-primary{
+        padding: 12px 28px;
+        border-radius: 30px;
+        font-weight: 600;
+        letter-spacing: 0.4px;
+    }
+
+    /* Footer social icons */
+    .footer .social-icons a{
+        color: #cfe5ff;
+        margin: 0 10px;
+        font-size: 1.15rem;
+        display: inline-block;
+        transition: color 0.2s ease, transform 0.15s ease;
+    }
+    .footer .social-icons a:hover{
+        color: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    /* Footer overall color tweak to improve contrast */
+    .footer{
+        background: #061225 !important;
+        color: #cfe5ff !important;
+    }
+
+    .footer .social-icons i{
+        color: #cfe5ff;
+        font-size: 1.25rem;
+    }
+
+    /* Forms */
+    .form-control{
+        border-radius: 12px;
+        padding: 12px 14px;
+        border: 1px solid var(--border-soft);
+    }
+
+    .form-control:focus{
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(13,110,253,0.15);
+    }
+
+    /* Footer */
+    footer{
+        background: #0b1220;
+        color: #c7d2fe;
+        font-size: 0.95rem;
+    }
+    /* ================= DARK MODE ================= */
+body.dark-mode{
+    background: linear-gradient(180deg, #0b1220 0%, #020617 100%);
+    color: #e5e7eb;
+}
+
+body.dark-mode section:nth-of-type(even){
+    background-color: #020617;
+}
+
+body.dark-mode .card{
+    background: #0f172a;
+    border-color: #1e293b;
+}
+
+body.dark-mode .section-title{
+    color: #e5e7eb;
+}
+
+body.dark-mode .navbar{
+    background: rgba(2,6,23,0.85) !important;
+}
+
+body.dark-mode .nav-link{
+    color: #e5e7eb !important;
+}
+
+body.dark-mode .nav-link:hover{
+    color: #60a5fa !important;
+}
+
+body.dark-mode footer{
+    background: #020617;
+    color: #c7d2fe;
+}
+
+body.dark-mode .progress{
+    background-color: #1e293b;
+}
+
+body.dark-mode .form-control{
+    background: #020617;
+    color: #e5e7eb;
+    border-color: #334155;
+}
+
+body.dark-mode .form-control::placeholder{
+    color: #94a3b8;
+}
+
+/* Improve contrast for muted text and headings in dark mode */
+body.dark-mode .text-muted{
+    color: #94a3b8 !important;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode li{
+    color: #e6eef8 !important;
+}
+
+/* Ensure progress bar labels remain legible in dark mode */
+body.dark-mode .progress-bar{
+    color: #071224 !important; /* darker text on light progress colors */
+}
+.welcome-screen{
+    position: fixed;
+    inset: 0;
+    background: #0b1220;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    z-index: 9999;
+}
+
+</style>
+
+</head>
+
+<body>
+<div id="welcomeScreen" class="welcome-screen">
+    <h1>Welcome to My Portfolio</h1>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Loganathan</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#portfolioNav" aria-controls="portfolioNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="portfolioNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#languages">Languages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+            
+   <button id="themeToggle" class="btn btn-outline-primary ms-lg-3 mt-2 mt-lg-0">
+    <i class="fa-solid fa-moon"></i>
+</button>
+
+
+        </div>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header class="container text-center py-5 mt-5 d-flex flex-column align-items-center" data-aos="fade-down">
+    <!-- Profile image: place a file named `profile.jpg` next to this HTML file to use it -->
+    <img src="WhatsApp Image 2025-07-26 at 7.10.09 PM.jpeg" alt="Profile picture of Loganathan" class="profile-pic mb-3 rounded-circle" onerror="this.onerror=null;this.src='https://via.placeholder.com/140?text=Profile';">
+
+    <h1 class="fw-bold">Loganathan</h1>
+    <h5 class="text-muted">Java Developer</h5>
+    <p class="mt-3">Building scalable backend applications using Java & Spring Boot</p>
+
+    <a href="R. pdf.pdf" class="btn btn-primary btn-resume mt-3" download>
+        <i class="fa-solid fa-download" aria-hidden="true"></i> Download Resume
+    </a>
+</header>
+
+<!-- ABOUT ME -->
+<section id="about" class="container mb-4" data-aos="fade-up">
+    <div class="card p-4">
+        <h3 class="section-title">
+            <i class="fa-solid fa-user icon"></i> About Me
+        </h3>
+
+        <p>
+            I am a motivated Java Developer with a Bachelor’s degree in
+            Electronics & Communication Engineering (ECE) and a strong passion
+            for software development and backend technologies.
+        </p>
+
+        <p>
+            I have hands-on experience with Core Java, Java 8, Collections,
+            JDBC, MySQL, and Spring Boot fundamentals. I enjoy writing clean,
+            efficient code and applying object-oriented principles to solve
+            real-world problems.
+        </p>
+
+        <p>
+            My engineering background has strengthened my analytical thinking,
+            debugging ability, and problem-solving skills. I have worked on
+            Java-based and web-based projects that provided practical exposure
+            to backend and frontend development.
+        </p>
+
+        <p>
+            I am actively seeking an entry-level Java Developer role where I
+            can apply my skills, learn industry best practices, and grow as a
+            professional software developer.
+        </p>
+    </div>
+</section>
+<!-- LANGUAGES -->
+<section id="languages" class="container mb-4" data-aos="fade-up">
+    <div class="card p-4">
+        <h3 class="section-title"><i class="fa-solid fa-language icon" aria-hidden="true"></i> Languages</h3>
+
+        <p class="mb-1"><strong>English</strong> <span class="text-muted">(Fluent)</span></p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-primary" role="progressbar" style="width:95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">90%</div>
+        </div>
+
+        <p class="mb-1"><strong>Tamil</strong> <span class="text-muted">(Fluent)</span></p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-primary" role="progressbar" style="width:95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">100%</div>
+        </div>
+
+        <p class="mb-1"><strong>Hindi</strong> <span class="text-muted">(Elementary)</span></p>
+        <div class="progress">
+            <div class="progress-bar bg-secondary" role="progressbar" style="width:40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">40%</div>
+        </div>
+    </div>
+</section>
+
+
+<!-- SKILLS -->
+<section id="skills" class="container mb-4" data-aos="fade-up">
+    <div class="card p-4">
+    <h3 class="section-title"><i class="fa-solid fa-gears icon" aria-hidden="true"></i> Technical Skills</h3>
+
+        <p>Core Java</p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-primary" role="progressbar" style="width:85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
+        </div>
+
+        <p>Java Collections</p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-success" role="progressbar" style="width:80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+        </div>
+
+        <p>Java 8 (Streams & Lambda)</p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-warning" role="progressbar" style="width:75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75%</div>
+        </div>
+
+        <p>JDBC & MySQL</p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-info" role="progressbar" style="width:80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+        </div>
+
+        <p>Spring Boot</p>
+        <div class="progress mb-3">
+            <div class="progress-bar bg-success" role="progressbar" style="width:65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+        </div>
+
+        <p>HTML, CSS, Bootstrap, ReactJS</p>
+        <div class="progress">
+            <div class="progress-bar bg-secondary" role="progressbar" style="width:70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+        </div>
+    </div>
+</section>
+<!-- SOFT SKILLS -->
+<section id="soft-skills" class="container mb-5" data-aos="fade-up">
+    <h3 class="section-title">
+        <i class="fa-solid fa-user-check icon"></i> Soft Skills
+    </h3>
+
+    <div class="row g-4">
+
+        <!-- Problem Solving -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in">
+            <div class="card h-100 p-4 text-center">
+                <i class="fa-solid fa-lightbulb fa-3x text-warning mb-3"></i>
+                <h5 class="fw-bold">Problem Solving</h5>
+                <p>
+                    Strong analytical and logical thinking skills to identify issues,
+                    analyze root causes, and implement effective solutions.
+                </p>
+            </div>
+        </div>
+
+        <!-- Communication -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card h-100 p-4 text-center">
+                <i class="fa-solid fa-comments fa-3x text-primary mb-3"></i>
+                <h5 class="fw-bold">Communication</h5>
+                <p>
+                    Clear verbal and written communication skills for effective
+                    collaboration with team members and stakeholders.
+                </p>
+            </div>
+        </div>
+
+        <!-- Quick Learner -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card h-100 p-4 text-center">
+                <i class="fa-solid fa-rocket fa-3x text-success mb-3"></i>
+                <h5 class="fw-bold">Quick Learner</h5>
+                <p>
+                    Ability to quickly learn new technologies, frameworks,
+                    and tools with a strong self-learning mindset.
+                </p>
+            </div>
+        </div>
+
+        <!-- Teamwork -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card h-100 p-4 text-center">
+                <i class="fa-solid fa-people-group fa-3x text-info mb-3"></i>
+                <h5 class="fw-bold">Teamwork</h5>
+                <p>
+                    Comfortable working collaboratively in team environments
+                    and contributing positively to shared goals.
+                </p>
+            </div>
+        </div>
+
+        <!-- Time Management -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+            <div class="card h-100 p-4 text-center">
+                <i class="fa-solid fa-clock fa-3x text-secondary mb-3"></i>
+                <h5 class="fw-bold">Time Management</h5>
+                <p>
+                    Ability to prioritize tasks effectively, meet deadlines,
+                    and manage time efficiently in fast-paced environments.
+                </p>
+            </div>
+        </div>
+
+        <!-- Adaptability -->
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="500">
+            <div class="card h-100 p-4 text-center">
+                <i class="fa-solid fa-arrows-rotate fa-3x text-danger mb-3"></i>
+                <h5 class="fw-bold">Adaptability</h5>
+                <p>
+                    Flexible and open to change, with the ability to adapt
+                    to new technologies, tools, and work environments.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- PROJECTS -->
+<section id="projects" class="container mb-5" data-aos="fade-up">
+    <h3 class="section-title"><i class="fa-solid fa-diagram-project icon" aria-hidden="true"></i> Projects</h3>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card p-3 h-100">
+                <h5>Library Management System</h5>
+                <p class="text-muted">Core Java | Collections</p>
+                <p>Console-based system to manage books and borrowing operations.</p>
+                <ul>
+                    <li>OOP principles</li>
+                    <li>CRUD using ArrayList</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 h-100">
+                <h5>Student Registration System</h5>
+                <p class="text-muted">Spring Boot | Thymeleaf</p>
+                <p>Web-based registration system following MVC architecture.</p>
+                <ul>
+                    <li>Form validation</li>
+                    <li>Controller & Model binding</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card p-3 h-100">
+                <h5>EV Car Website</h5>
+                <p class="text-muted">ReactJS | API | EmailJS</p>
+                <p>Responsive EV website with API integration and email support.</p>
+                <ul>
+                    <li>Multi-page UI</li>
+                    <li>EmailJS integration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education" class="container mb-4" data-aos="fade-up">
+    <div class="card p-4">
+        <h3 class="section-title">
+            <i class="fa-solid fa-graduation-cap icon" aria-hidden="true"></i> Education
+        </h3>
+
+        <h5 class="fw-bold">
+            Bachelor of Engineering (B.E.)  Electronics & Communication Engineering
+        </h5>
+        <p><b>Year of Graduation:</b> 2025</p>
+
+        <p>
+            Completed Bachelor of Engineering in Electronics & Communication Engineering,
+            gaining strong analytical and problem-solving skills.
+            Developed a strong interest in Java and backend development.
+        </p>
+
+        <ul>
+            <li>Strong foundation in electronics and communication systems</li>
+            <li>Hands-on experience with Java, JDBC, and MySQL</li>
+            <li>Knowledge of computer networks and embedded systems</li>
+            <li>Experience in project-based and lab-oriented learning</li>
+        </ul>
+    </div>
+</section>
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="container mb-5" data-aos="fade-up">
+    <h3 class="section-title">
+        <i class="fa-solid fa-certificate icon"></i> Certifications
+    </h3>
+
+    <div class="row g-4">
+
+        <!-- Blockchain - Naan Mudhalvan -->
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in">
+            <div class="card h-100 p-3 text-center">
+                <i class="fa-solid fa-link fa-3x text-primary mb-3"></i>
+                <h5 class="fw-bold">Blockchain Technology</h5>
+                <p class="text-muted">Naan Mudhalvan Program</p>
+                <p>
+                    Gained foundational knowledge of blockchain concepts including
+                    distributed ledgers, blocks, hashing, consensus mechanisms,
+                    and real-world blockchain use cases.
+                </p>
+            </div>
+        </div>
+
+        <!-- Linux - IIT Bombay -->
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card h-100 p-3 text-center">
+                <i class="fa-brands fa-linux fa-3x text-dark mb-3"></i>
+                <h5 class="fw-bold">Linux Fundamentals</h5>
+                <p class="text-muted">IIT Bombay (Spoken Tutorial)</p>
+                <p>
+                    Learned Linux operating system fundamentals including
+                    file system navigation, shell commands, permissions,
+                    process management, and basic scripting concepts.
+                </p>
+            </div>
+        </div>
+
+        <!-- Java Full Stack - Pumo Technovation -->
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card h-100 p-3 text-center">
+                <i class="fa-brands fa-java fa-3x text-danger mb-3"></i>
+                <h5 class="fw-bold">Java Full Stack Development</h5>
+                <p class="text-muted">Pumo Technovation</p>
+                <p>
+                    Completed full stack training covering Core Java, Java 8,
+                    JDBC, MySQL, Spring Boot basics, HTML, CSS, Bootstrap,
+                    and introductory frontend concepts.
+                </p>
+            </div>
+        </div>
+
+        <!-- Network Protocols - Cisco -->
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card h-100 p-3 text-center">
+                <i class="fa-solid fa-network-wired fa-3x text-success mb-3"></i>
+                <h5 class="fw-bold">Network Protocols</h5>
+                <p class="text-muted">Cisco Networking Academy</p>
+                <p>
+                    Studied networking fundamentals including OSI & TCP/IP models,
+                    network protocols, IP addressing, routing basics,
+                    and data communication concepts.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="container mb-5" data-aos="fade-up">
+    <div class="card p-4">
+    <h3 class="section-title"><i class="fa-solid fa-envelope icon" aria-hidden="true"></i> Contact Me</h3>
+
+        <form id="contact-form">
+            <input class="form-control mb-3" name="from_name" placeholder="Your Name" required>
+            <input class="form-control mb-3" name="from_email" type="email" placeholder="Your Email" required>
+            <textarea class="form-control mb-3" name="message" rows="4" placeholder="Message" required></textarea>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+            <p id="status" class="mt-2"></p>
+        </form>
+    </div>
+</section>
+
+<footer class="text-center text-muted py-4 footer">
+    <div class="container">
+        <div class="social-icons mb-2">
+            <!-- Replace YOUR_USERNAME with your actual profile names -->
+            <a href="https://github.com/Logan-hub43" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/loganathan-p" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://www.instagram.com/loganisaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+
+        <div>© 2025 Loganathan | Java Developer</div>
+    </div>
+</footer>
+
+<!-- Additional dark-mode fixes (ensure readable text) -->
+<style>
+    body.dark-mode a,
+    body.dark-mode .nav-link,
+    body.dark-mode .btn,
+    body.dark-mode .card a{
+        color: #cfe8ff !important;
+    }
+
+    body.dark-mode .text-muted{
+        color: #9fb2c8 !important;
+    }
+
+    body.dark-mode .icon,
+    body.dark-mode .fa{
+        color: #84b7ff !important;
+    }
+
+    /* Make progress bar labels readable on dark backgrounds */
+    body.dark-mode .progress-bar{
+        color: #0b1220 !important;
+        font-weight: 700;
+    }
+
+    /* Buttons: ensure contrast */
+    body.dark-mode .btn-primary{
+        background-color: #2563eb !important;
+        border-color: #2563eb !important;
+        color: #ffffff !important;
+    }
+</style>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    emailjs.init("ifgJ2RL00EYzUK0cS");
+
+    document.getElementById("contact-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+        emailjs.sendForm("service_cf4u2ej", "template_c9n2lub", this)
+        .then(() => {
+            document.getElementById("status").innerHTML =
+                "<span class='text-success'>Message sent successfully!</span>";
+            this.reset();
+        }, () => {
+            document.getElementById("status").innerHTML =
+                "<span class='text-danger'>Failed to send message.</span>";
+        });
+    });
+</script>
+<script>
+    const toggleBtn = document.getElementById("themeToggle");
+    const icon = toggleBtn.querySelector("i");
+
+    // Load saved theme
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+        icon.classList.replace("fa-moon", "fa-sun");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+            localStorage.setItem("theme", "dark");
+            icon.classList.replace("fa-moon", "fa-sun");
+        } else {
+            localStorage.setItem("theme", "light");
+            icon.classList.replace("fa-sun", "fa-moon");
+        }
+    });
+</script>
+<script>
+    setTimeout(() => {
+        document.getElementById("welcomeScreen").style.display = "none";
+    }, 2000);
+</script>
+
+</body>
+</html>
