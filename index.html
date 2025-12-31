@@ -291,6 +291,17 @@
         box-shadow: 0 12px 30px rgba(2,6,23,0.45);
     }
 
+    /* Ensure header subtitle is readable over the wallpaper in light mode */
+    header .text-muted{
+        color: rgba(255,255,255,0.95) !important;
+        opacity: 0.95;
+    }
+
+    /* Dark-mode specific header subtitle color (keeps contrast with darker overlay) */
+    body.dark-mode header .text-muted{
+        color: #cfe8ff !important;
+    }
+
     /* responsive: reduce height and image size on smaller screens */
     @media (max-width: 768px){
         header{ padding-top: 56px; padding-bottom: 56px; min-height: 260px; }
