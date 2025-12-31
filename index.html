@@ -67,18 +67,41 @@
         margin-bottom: 28px;
     }
 
-    /* Cards */
+    /* Cards with vibrant gradient borders */
     .card{
         background: var(--card-bg);
-        border: 1px solid var(--border-soft);
+        /* gradient border using border-image for broad browser support */
+        border: 2px solid transparent;
+        border-image: linear-gradient(135deg, #ff6a00, #ff1e56 35%, #7f00ff 65%, #00c2ff) 1;
         border-radius: 18px;
         padding: 24px;
-        transition: all 0.35s ease;
+        transition: transform 0.35s ease, box-shadow 0.35s ease, border-image 0.35s ease;
     }
 
     .card:hover{
         transform: translateY(-6px);
         box-shadow: 0 20px 35px rgba(15, 23, 42, 0.12);
+    }
+
+    /* Flip Mode (tilt/3D) - when enabled it gives a 3D flip/tilt effect on cards and sections */
+    body.flip-mode .card{
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(.2,.9,.2,1), box-shadow 0.4s ease;
+        will-change: transform;
+    }
+
+    body.flip-mode .card:hover{
+        transform: perspective(900px) rotateX(6deg) rotateY(-8deg) translateY(-8px);
+        box-shadow: 0 30px 50px rgba(2,6,23,0.28);
+    }
+
+    /* Slight tilting for whole sections to emphasize the flip mode */
+    body.flip-mode section{
+        transition: transform 0.6s ease;
+    }
+
+    body.flip-mode section:hover{
+        transform: translateY(-6px) perspective(800px) rotateX(2deg);
     }
 
     /* Icons */
@@ -109,6 +132,31 @@
         font-weight: 600;
     }
 
+    /* Vibrant animated gradients for progress bars */
+    .progress-bar{
+        background-size: 200% 100%;
+        animation: progressGradient 6s linear infinite;
+        color: #ffffff !important;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.35);
+        transition: width 0.6s ease, background-position 0.6s linear;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:700;
+    }
+
+    .progress-bar.bg-primary{ background-image: linear-gradient(90deg,#60a5fa 0%,#7c3aed 45%,#06b6d4 100%); }
+    .progress-bar.bg-success{ background-image: linear-gradient(90deg,#34d399 0%,#10b981 45%,#059669 100%); }
+    .progress-bar.bg-warning{ background-image: linear-gradient(90deg,#f59e0b 0%,#f97316 45%,#ef4444 100%); }
+    .progress-bar.bg-info{ background-image: linear-gradient(90deg,#06b6d4 0%,#0ea5e9 45%,#60a5fa 100%); }
+    .progress-bar.bg-secondary{ background-image: linear-gradient(90deg,#94a3b8 0%,#64748b 45%,#475569 100%); }
+
+    @keyframes progressGradient{
+        0%{ background-position: 0% 50%; }
+        50%{ background-position: 100% 50%; }
+        100%{ background-position: 0% 50%; }
+    }
+
     /* Buttons */
     .btn-primary{
         padding: 12px 28px;
@@ -116,6 +164,18 @@
         font-weight: 600;
         letter-spacing: 0.4px;
     }
+
+    /* Hire Me CTA button style */
+    .btn-hire {
+        padding: 12px 22px;
+        border-radius: 30px;
+        background: linear-gradient(90deg,#16a34a,#059669);
+        border: none;
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(5,150,105,0.18);
+        transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-hire:hover{ transform: translateY(-3px); box-shadow:0 18px 30px rgba(5,150,105,0.18); }
 
     /* Footer social icons */
     .footer .social-icons a{
@@ -129,6 +189,48 @@
         color: var(--primary);
         transform: translateY(-3px);
     }
+
+    /* Contact details styles */
+    .contact-item{
+        display:flex;
+        align-items:flex-start;
+        gap:12px;
+        margin-bottom:12px;
+    }
+    .contact-icon{
+        width:44px;
+        height:44px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        border-radius:12px;
+        color:#fff;
+        box-shadow:0 8px 20px rgba(2,6,23,0.08);
+        transition:transform .18s ease, box-shadow .18s ease;
+        background-size:200% 200%;
+        backface-visibility: hidden;
+    }
+    .contact-icon .fa{ font-size:1.1rem; }
+
+    /* subtle pulse animation for icons */
+    @keyframes pulseIcon { 0%{ transform:scale(1);}50%{ transform:scale(1.08);}100%{ transform:scale(1);} }
+    .contact-icon.animate{ animation: pulseIcon 2.4s infinite ease-in-out; }
+
+    /* Animated gradient backgrounds per contact type */
+    .contact-icon.phone{ background-image: linear-gradient(135deg,#ff7a18 0%,#ff1e56 45%,#7f00ff 100%); }
+    .contact-icon.email{ background-image: linear-gradient(135deg,#00c6ff 0%,#0072ff 45%,#00ffd5 100%); }
+    .contact-icon.location{ background-image: linear-gradient(135deg,#ffb347 0%,#ffcc33 45%,#ff7a18 100%); }
+
+    /* slow shifting of the gradient for a gentle animated effect */
+    @keyframes gradientShift {
+        0%{ background-position: 0% 50%; }
+        50%{ background-position: 100% 50%; }
+        100%{ background-position: 0% 50%; }
+    }
+    .contact-icon.phone, .contact-icon.email, .contact-icon.location{
+        animation: gradientShift 6s ease infinite, pulseIcon 2.4s infinite ease-in-out;
+    }
+
 
     /* Footer overall color tweak to improve contrast */
     .footer{
@@ -172,6 +274,10 @@ body.dark-mode section:nth-of-type(even){
 body.dark-mode .card{
     background: #0f172a;
     border-color: #1e293b;
+}
+/* Slightly tweaked gradient for dark mode so borders pop on dark backgrounds */
+body.dark-mode .card{
+    border-image: linear-gradient(135deg, #3dd6ff, #7c4dff 40%, #ff6a95 80%) 1;
 }
 
 body.dark-mode .section-title{
@@ -227,8 +333,85 @@ body.dark-mode li{
 
 /* Ensure progress bar labels remain legible in dark mode */
 body.dark-mode .progress-bar{
-    color: #071224 !important; /* darker text on light progress colors */
+    color: #ffffff !important; /* white text on colored progress bars for legibility */
+    font-weight: 700;
 }
+
+/* Dark-mode variants for progress bar gradients so they pop on dark backgrounds */
+body.dark-mode .progress-bar.bg-primary{ background-image: linear-gradient(90deg,#2b6ef6 0%,#5b21b6 45%,#0891b2 100%); }
+body.dark-mode .progress-bar.bg-success{ background-image: linear-gradient(90deg,#059669 0%,#10b981 45%,#34d399 100%); }
+body.dark-mode .progress-bar.bg-warning{ background-image: linear-gradient(90deg,#d97706 0%,#f97316 45%,#ef4444 100%); }
+body.dark-mode .progress-bar.bg-info{ background-image: linear-gradient(90deg,#0891b2 0%,#0ea5e9 45%,#60a5fa 100%); }
+body.dark-mode .progress-bar.bg-secondary{ background-image: linear-gradient(90deg,#475569 0%,#334155 45%,#0f172a 100%); }
+
+/* Slight inner glow to improve perceived contrast on tiny bars */
+body.dark-mode .progress-bar{ box-shadow: inset 0 -6px 18px rgba(0,0,0,0.25); }
+
+/* Icon and text color overrides for consistent visibility */
+body.dark-mode .fa,
+body.dark-mode .fas,
+body.dark-mode .far,
+body.dark-mode .fab,
+body.dark-mode .icon,
+body.dark-mode i{
+    color: #84b7ff !important; /* light bluish icons that contrast with dark bg */
+}
+
+/* Override utility text classes that may have dark colors in markup */
+body.dark-mode .text-dark{ color: #e6eef8 !important; }
+body.dark-mode .text-secondary{ color: #9fb2c8 !important; }
+body.dark-mode .text-warning{ color: #fbbf24 !important; }
+
+/* Navbar toggler (hamburger) visibility in dark mode */
+body.dark-mode .navbar-toggler-icon{
+    filter: invert(1) brightness(2) contrast(1.2);
+}
+
+/* Outline/secondary buttons and links */
+body.dark-mode .btn-outline-secondary{
+    color: #cfe8ff !important;
+    border-color: #334155 !important;
+}
+
+/* Contact icon backgrounds for dark mode */
+body.dark-mode .contact-icon{
+    background: linear-gradient(180deg,#071224,#071a2a);
+    color: #7dd3fc;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+/* Dark mode tweak for animated gradients: slightly desaturate but keep contrast */
+body.dark-mode .contact-icon.phone{ background-image: linear-gradient(135deg,#ff6a5a 0%,#ff2e6b 45%,#6b3bff 100%); }
+body.dark-mode .contact-icon.email{ background-image: linear-gradient(135deg,#00b4ff 0%,#0066cc 45%,#00c6a6 100%); }
+body.dark-mode .contact-icon.location{ background-image: linear-gradient(135deg,#ff9f43 0%,#ffb84d 45%,#ff8a00 100%); }
+
+/* Ensure contact icon text remains white in dark mode */
+body.dark-mode .contact-icon{ color: #ffffff !important; }
+
+/* Make sure link text near icons is readable */
+body.dark-mode .contact-item a{ color: #e6f6ff !important; }
+
+/* Footer social icons explicit color */
+body.dark-mode .footer .social-icons a{ color: #cfe5ff !important; }
+
+/* Contact area specific overrides */
+.contact-item a{
+    color: #0b1220; /* default dark text for light mode */
+}
+
+body.dark-mode .contact-item a{
+    color: #cfe8ff !important; /* light color for links in dark mode */
+}
+
+/* Ensure icons inside buttons are visible in dark mode */
+body.dark-mode .btn i,
+body.dark-mode .btn .fa{
+    color: #ffffff !important;
+}
+
+/* Slightly larger contact icons for clarity */
+.contact-icon{ width:48px; height:48px; }
+.contact-icon .fa{ font-size:1.2rem; }
 .welcome-screen{
     position: fixed;
     inset: 0;
@@ -267,6 +450,8 @@ body.dark-mode .progress-bar{
                 <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                 <li class="nav-item"><a class="nav-link" href="#languages">Languages</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tools">Tools</a></li>
+                <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                 <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -274,7 +459,11 @@ body.dark-mode .progress-bar{
             
    <button id="themeToggle" class="btn btn-outline-primary ms-lg-3 mt-2 mt-lg-0">
     <i class="fa-solid fa-moon"></i>
-</button>
+   </button>
+
+   <button id="flipToggle" class="btn btn-outline-secondary ms-2 mt-2 mt-lg-0" title="Toggle Flip Mode" aria-pressed="false">
+       <i class="fa-solid fa-arrows-rotate"></i>
+   </button>
 
 
         </div>
@@ -293,6 +482,7 @@ body.dark-mode .progress-bar{
     <a href="R. pdf.pdf" class="btn btn-primary btn-resume mt-3" download>
         <i class="fa-solid fa-download" aria-hidden="true"></i> Download Resume
     </a>
+        <a href="#contact" id="hireMeBtn" class="btn btn-hire mt-3 ms-2" aria-label="Hire me"><i class="fa-solid fa-briefcase me-2" aria-hidden="true"></i>Hire Me</a>
 </header>
 
 <!-- ABOUT ME -->
@@ -478,38 +668,77 @@ body.dark-mode .progress-bar{
 
     <div class="row g-4">
         <div class="col-md-4">
-            <div class="card p-3 h-100">
-                <h5>Library Management System</h5>
-                <p class="text-muted">Core Java | Collections</p>
-                <p>Console-based system to manage books and borrowing operations.</p>
-                <ul>
-                    <li>OOP principles</li>
-                    <li>CRUD using ArrayList</li>
-                </ul>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card p-3 h-100">
+                        <h5>Library Management System</h5>
+                        <p class="text-muted">Core Java | Collections</p>
+                        <p>Console-based system to manage books and borrowing operations.</p>
+                        <ul>
+                            <li>OOP principles</li>
+                            <li>CRUD using ArrayList</li>
+                        </ul>
+                    </div>
+                    <div class="flip-card-back card p-3 h-100">
+                        <h5 class="fw-bold">Tools & Tech</h5>
+                        <p class="mb-2 text-muted">Used in this project:</p>
+                        <div class="d-flex flex-column gap-2">
+                            <div><i class="fa-brands fa-java me-2" aria-hidden="true"></i>Core Java</div>
+                            <div><i class="fa-solid fa-list-ul me-2" aria-hidden="true"></i>Java Collections</div>
+                            <div><i class="fa-solid fa-code me-2" aria-hidden="true"></i>OOP Design</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="card p-3 h-100">
-                <h5>Student Registration System</h5>
-                <p class="text-muted">Spring Boot | Thymeleaf</p>
-                <p>Web-based registration system following MVC architecture.</p>
-                <ul>
-                    <li>Form validation</li>
-                    <li>Controller & Model binding</li>
-                </ul>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card p-3 h-100">
+                        <h5>Student Registration System</h5>
+                        <p class="text-muted">Spring Boot | Thymeleaf</p>
+                        <p>Web-based registration system following MVC architecture.</p>
+                        <ul>
+                            <li>Form validation</li>
+                            <li>Controller & Model binding</li>
+                        </ul>
+                    </div>
+                    <div class="flip-card-back card p-3 h-100">
+                        <h5 class="fw-bold">Tools & Tech</h5>
+                        <p class="mb-2 text-muted">Used in this project:</p>
+                        <div class="d-flex flex-column gap-2">
+                            <div><i class="fa-brands fa-java me-2" aria-hidden="true"></i>Spring Boot</div>
+                            <div><i class="fa-solid fa-file-code me-2" aria-hidden="true"></i>Thymeleaf</div>
+                            <div><i class="fa-solid fa-database me-2" aria-hidden="true"></i>MySQL</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="col-md-4">
-            <div class="card p-3 h-100">
-                <h5>EV Car Website</h5>
-                <p class="text-muted">ReactJS | API | EmailJS</p>
-                <p>Responsive EV website with API integration and email support.</p>
-                <ul>
-                    <li>Multi-page UI</li>
-                    <li>EmailJS integration</li>
-                </ul>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front card p-3 h-100">
+                        <h5>EV Car Website</h5>
+                        <p class="text-muted">ReactJS | API | EmailJS</p>
+                        <p>Responsive EV website with API integration and email support.</p>
+                        <ul>
+                            <li>Multi-page UI</li>
+                            <li>EmailJS integration</li>
+                        </ul>
+                    </div>
+                    <div class="flip-card-back card p-3 h-100">
+                        <h5 class="fw-bold">Tools & Tech</h5>
+                        <p class="mb-2 text-muted">Used in this project:</p>
+                        <div class="d-flex flex-column gap-2">
+                            <div><i class="fa-brands fa-react me-2" aria-hidden="true"></i>ReactJS</div>
+                            <div><i class="fa-solid fa-code-branch me-2" aria-hidden="true"></i>REST APIs</div>
+                            <div><i class="fa-solid fa-envelope me-2" aria-hidden="true"></i>EmailJS</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -523,14 +752,15 @@ body.dark-mode .progress-bar{
         </h3>
 
         <h5 class="fw-bold">
-            Bachelor of Engineering (B.E.)  Electronics & Communication Engineering
+            Bachelor of Engineering (B.E.) — Electronics & Communication Engineering
         </h5>
         <p><b>Year of Graduation:</b> 2025</p>
 
         <p>
             Completed Bachelor of Engineering in Electronics & Communication Engineering,
-            gaining strong analytical and problem-solving skills.
-            Developed a strong interest in Java and backend development.
+            gaining strong analytical and problem-solving skills. During my degree I
+            developed a particular interest in backend development, working with Java
+            and Spring Boot on several course projects and labs.
         </p>
 
         <ul>
@@ -539,8 +769,81 @@ body.dark-mode .progress-bar{
             <li>Knowledge of computer networks and embedded systems</li>
             <li>Experience in project-based and lab-oriented learning</li>
         </ul>
+
+        <hr>
+
+        <h5 class="fw-bold mt-3">Higher Secondary Education</h5>
+        <p class="mb-1"><strong>School:</strong> K.C. Sankaralinga Nadar Hr. Sec. School</p>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="mb-1">Std. 12 — Batch: 2019–2020</h6>
+                <p class="text-muted small">Science stream (Mathematics, Physics, Chemistry). Built strong foundations in mathematics and analytical problem solving which helped transition smoothly into engineering studies. Active in the school's coding club and participated in inter-school science fairs.</p>
+            </div>
+            <div class="col-md-6">
+                <h6 class="mb-1">Std. 11 — Batch: 2018–2019</h6>
+                <p class="text-muted small">Completed Std. 11 with focus on core science subjects. Engaged in laboratory work, group projects and introductory programming exercises which sparked an early interest in software development.</p>
+            </div>
+        </div>
+
+        <p class="mt-3">These higher-secondary studies provided the academic groundwork and extracurricular exposure that motivated me to pursue engineering and programming.</p>
     </div>
 </section>
+<!-- TOOLS -->
+<section id="tools" class="container mb-5" data-aos="fade-up">
+    <h3 class="section-title">
+        <i class="fa-solid fa-screwdriver-wrench icon"></i> Tools
+    </h3>
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in">
+            <div class="card h-100 text-center p-4">
+                <i class="fa-solid fa-code fa-3x text-primary mb-3"></i>
+                <h5 class="fw-bold">VS Code</h5>
+                <p>
+                    Used as the primary code editor for frontend and backend
+                    development with extensions for productivity.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card h-100 text-center p-4">
+                <i class="fa-brands fa-java fa-3x text-danger mb-3"></i>
+                <h5 class="fw-bold">Eclipse IDE</h5>
+                <p>
+                    Used for Java and backend development including debugging,
+                    project structuring, and build management.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card h-100 text-center p-4">
+                <i class="fa-brands fa-github fa-3x text-dark mb-3"></i>
+                <h5 class="fw-bold">Git & GitHub</h5>
+                <p>
+                    Used for version control, project collaboration,
+                    repository management, and portfolio hosting.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card h-100 text-center p-4">
+                <i class="fa-solid fa-file-lines fa-3x text-success mb-3"></i>
+                <h5 class="fw-bold">MS Office Suite</h5>
+                <p>
+                    Used for documentation, presentations, project reports,
+                    and professional communication.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 <!-- CERTIFICATIONS -->
 <section id="certifications" class="container mb-5" data-aos="fade-up">
     <h3 class="section-title">
@@ -607,6 +910,95 @@ body.dark-mode .progress-bar{
 
     </div>
 </section>
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="container mb-5" data-aos="fade-up">
+    <h3 class="section-title">
+        <i class="fa-solid fa-trophy icon"></i> Achievements & Strengths
+    </h3>
+
+    <div class="row g-4">
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in">
+            <div class="card h-100 p-4">
+                <h5 class="fw-bold">
+                    <i class="fa-solid fa-user-tie text-primary me-2"></i>
+                    Team Lead
+                </h5>
+                <p>
+                    Served as a <strong>Team Lead</strong> during the college
+                    project expo, coordinating tasks and guiding team members
+                    to successful project completion.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+            <div class="card h-100 p-4">
+                <h5 class="fw-bold">
+                    <i class="fa-solid fa-microphone text-success me-2"></i>
+                    Paper Presentation Coordinator
+                </h5>
+                <p>
+                    Actively coordinated paper presentation events, managing
+                    participants, schedules, and smooth event execution.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+            <div class="card h-100 p-4">
+                <h5 class="fw-bold">
+                    <i class="fa-solid fa-people-group text-info me-2"></i>
+                    Leadership & Teamwork
+                </h5>
+                <p>
+                    Demonstrated strong leadership and team-management abilities
+                    while working on academic and personal projects.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+            <div class="card h-100 p-4">
+                <h5 class="fw-bold">
+                    <i class="fa-solid fa-brain text-warning me-2"></i>
+                    Quick Learner
+                </h5>
+                <p>
+                    Ability to quickly learn new technologies and adapt to
+                    changing project requirements with a strong learning mindset.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+            <div class="card h-100 p-4">
+                <h5 class="fw-bold">
+                    <i class="fa-solid fa-chart-line text-danger me-2"></i>
+                    Analytical Skills
+                </h5>
+                <p>
+                    Possess excellent analytical and problem-solving skills
+                    applied while building real-world software projects.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="500">
+            <div class="card h-100 p-4">
+                <h5 class="fw-bold">
+                    <i class="fa-solid fa-laptop-code text-secondary me-2"></i>
+                    Project-Oriented Mindset
+                </h5>
+                <p>
+                    Passionate about building real-world applications and
+                    continuously improving development skills.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 
 <!-- CONTACT -->
@@ -614,13 +1006,55 @@ body.dark-mode .progress-bar{
     <div class="card p-4">
     <h3 class="section-title"><i class="fa-solid fa-envelope icon" aria-hidden="true"></i> Contact Me</h3>
 
-        <form id="contact-form">
-            <input class="form-control mb-3" name="from_name" placeholder="Your Name" required>
-            <input class="form-control mb-3" name="from_email" type="email" placeholder="Your Email" required>
-            <textarea class="form-control mb-3" name="message" rows="4" placeholder="Message" required></textarea>
-            <button class="btn btn-primary" type="submit">Send Message</button>
-            <p id="status" class="mt-2"></p>
-        </form>
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="contact-item">
+                    <div class="contact-icon animate phone" aria-hidden="true"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
+                    <div>
+                        <div class="fw-bold">Mobile</div>
+                        <a href="tel:8925175286" class="text-decoration-none">+91 89251 75286</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon animate email" aria-hidden="true"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
+                    <div>
+                        <div class="fw-bold">Email</div>
+                        <a href="mailto:loganisali2345@gmail.com" class="text-decoration-none">loganisali2345@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon animate location" aria-hidden="true"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
+                    <div>
+                        <div class="fw-bold">Location</div>
+                        <div class="text-muted">Chennai, Tamil Nadu, India</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <form id="contact-form">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <input class="form-control" name="from_name" placeholder="Your Name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <input class="form-control" name="from_email" type="email" placeholder="Your Email" required>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-primary me-3" type="submit">Send Message</button>
+                        <a href="tel:8925175286" class="btn btn-outline-secondary" aria-label="Call me"><i class="fa-solid fa-phone me-2"></i>Call</a>
+                        <a href="#hireMeBtn" class="btn btn-hire ms-3" aria-label="Hire me quick">Hire Me</a>
+                    </div>
+                    <p id="status" class="mt-3"></p>
+                </form>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -718,6 +1152,32 @@ body.dark-mode .progress-bar{
             localStorage.setItem("theme", "light");
             icon.classList.replace("fa-sun", "fa-moon");
         }
+    });
+</script>
+<script>
+    // Flip mode: toggle a class on body to enable/disable 3D flip/tilt effects
+    const flipBtn = document.getElementById('flipToggle');
+    function setFlipMode(enabled){
+        if(enabled){
+            document.body.classList.add('flip-mode');
+            flipBtn.setAttribute('aria-pressed', 'true');
+            flipBtn.classList.remove('btn-outline-secondary');
+            flipBtn.classList.add('btn-secondary');
+        } else {
+            document.body.classList.remove('flip-mode');
+            flipBtn.setAttribute('aria-pressed', 'false');
+            flipBtn.classList.remove('btn-secondary');
+            flipBtn.classList.add('btn-outline-secondary');
+        }
+        localStorage.setItem('flipMode', enabled ? 'on' : 'off');
+    }
+
+    // initialize from localStorage
+    if(localStorage.getItem('flipMode') === 'on') setFlipMode(true);
+
+    flipBtn.addEventListener('click', () => {
+        const enabled = !document.body.classList.contains('flip-mode');
+        setFlipMode(enabled);
     });
 </script>
 <script>
