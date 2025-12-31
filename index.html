@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,12 +254,57 @@
         box-shadow: 0 0 0 3px rgba(13,110,253,0.15);
     }
 
-    /* Footer */
-    footer{
-        background: #0b1220;
-        color: #c7d2fe;
-        font-size: 0.95rem;
+    /* Header wallpaper - adds a hero background image to the top header */
+    header{
+        position: relative;
+        background-image: linear-gradient(rgba(3,7,18,0.20), rgba(3,7,18,0.08)), url('header.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 18px;
+        padding-top: 90px;
+        padding-bottom: 90px;
+        color: #fff;
+        overflow: hidden;
+        min-height: 320px;
     }
+
+    /* subtle overlay using a pseudo-element so text remains readable over the photo */
+    header::before{
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(3,7,18,0.35), rgba(3,7,18,0.10));
+        border-radius: inherit;
+        z-index: 0;
+    }
+
+    /* keep header children above the overlay */
+    header > *{
+        position: relative;
+        z-index: 1;
+    }
+
+    /* slightly tweak the profile picture border when over the background */
+    header .profile-pic{
+        border: 4px solid rgba(255,255,255,0.9);
+        box-shadow: 0 12px 30px rgba(2,6,23,0.45);
+    }
+
+    /* responsive: reduce height and image size on smaller screens */
+    @media (max-width: 768px){
+        header{ padding-top: 56px; padding-bottom: 56px; min-height: 260px; }
+        header .profile-pic{ width: 120px; height: 120px; }
+    }
+
+    /* Dark-mode tweak: increase overlay darkness for legibility */
+    body.dark-mode header{
+        background-image: linear-gradient(rgba(2,6,23,0.50), rgba(2,6,23,0.35)), url('header.jpeg');
+    }
+    body.dark-mode header::before{
+        background: linear-gradient(180deg, rgba(2,6,23,0.55), rgba(2,6,23,0.30));
+    }
+
     /* ================= DARK MODE ================= */
 body.dark-mode{
     background: linear-gradient(180deg, #0b1220 0%, #020617 100%);
@@ -841,6 +885,28 @@ body.dark-mode .btn .fa{
             </div>
         </div>
 
+        <!-- Added: Spring Boot -->
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+            <div class="card h-100 text-center p-4">
+                <i class="fa-brands fa-java fa-3x text-success mb-3"></i>
+                <h5 class="fw-bold">Spring Boot</h5>
+                <p>
+                    Used to build production-ready Java microservices and REST APIs with embedded servers, dependency injection and the Spring ecosystem.
+                </p>
+            </div>
+        </div>
+
+        <!-- Added: MySQL -->
+        <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="500">
+            <div class="card h-100 text-center p-4">
+                <i class="fa-solid fa-database fa-3x text-info mb-3"></i>
+                <h5 class="fw-bold">MySQL</h5>
+                <p>
+                    Relational database used for schema design, queries, and persistence in Java/Spring projects.
+                </p>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -1065,7 +1131,7 @@ body.dark-mode .btn .fa{
             <a href="https://github.com/Logan-hub43" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <i class="fa-brands fa-github"></i>
             </a>
-            <a href="https://www.linkedin.com/in/loganathan-p" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/loganathan." target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
             <a href="https://www.instagram.com/loganisaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1107,6 +1173,27 @@ body.dark-mode .btn .fa{
         border-color: #2563eb !important;
         color: #ffffff !important;
     }
+
+    /* Ensure project flip-card front/back content is readable in dark mode */
+    body.dark-mode .flip-card .flip-card-front,
+    body.dark-mode .flip-card .flip-card-back,
+    body.dark-mode .flip-card .card {
+        background: #0f172a !important; /* match card dark background */
+        color: #e6eef8 !important;      /* light text for readability */
+    }
+
+    /* Make the small 'Used in this project' label more visible */
+    body.dark-mode .flip-card .text-muted {
+        color: #9fb2c8 !important;
+    }
+
+    /* Ensure icons inside project cards keep a bright accent color */
+    body.dark-mode .flip-card i,
+    body.dark-mode .flip-card .fa-brands,
+    body.dark-mode .flip-card .fa-solid {
+        color: #84b7ff !important;
+    }
+
 </style>
 
 <!-- JS -->
