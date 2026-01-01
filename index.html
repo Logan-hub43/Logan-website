@@ -15,6 +15,247 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        /* ================= PROFILE GLOW ================= */
+.profile-glow{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(
+        120deg,
+        #ff6a00,
+        #ff1e56,
+        #7f00ff,
+        #00c2ff,
+        #22d3ee
+    );
+    background-size: 400% 400%;
+    animation: profileGlow 8s linear infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.profile-pic{
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #fff;
+}
+
+/* Glow animation */
+@keyframes profileGlow{
+    0%{ background-position: 0% 50%; }
+    50%{ background-position: 100% 50%; }
+    100%{ background-position: 0% 50%; }
+}
+/* ================= HERO TEXT ANIMATION ================= */
+.hero-name{
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+    animation: heroReveal 2s cubic-bezier(.19,1,.22,1) forwards;
+}
+
+.hero-role{
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(8px);
+    animation: heroReveal 2s cubic-bezier(.19,1,.22,1) forwards;
+    animation-delay: 0.8s;
+    color: #38bdf8;
+}
+
+.hero-desc{
+    opacity: 0;
+    animation: fadeOnly 1.5s ease forwards;
+    animation-delay: 1.6s;
+}
+
+/* Animations */
+@keyframes heroReveal{
+    to{
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeOnly{
+    to{ opacity: 1; }
+}
+
+        /* ================= GLOBAL GLOW BUTTON ================= */
+button,
+a.btn,
+.cta,
+.glow-btn{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg,#0f172a,#020617);
+    color: #fff;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* Neon border */
+button::before,
+a.btn::before,
+.cta::before,
+.glow-btn::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: linear-gradient(
+        120deg,
+        #ff6a00,
+        #ff1e56,
+        #7f00ff,
+        #00c2ff,
+        #22d3ee
+    );
+    background-size: 400% 400%;
+    animation: glowBorder 6s linear infinite;
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Glow pulse */
+button::after,
+a.btn::after,
+.cta::after,
+.glow-btn::after{
+    content: "";
+    position: absolute;
+    inset: -25px;
+    background: radial-gradient(
+        circle at var(--x,50%) var(--y,50%),
+        rgba(124,77,255,0.45),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity .25s ease;
+    z-index: -1;
+}
+
+/* Desktop hover */
+@media (hover:hover){
+    button:hover,
+    a.btn:hover,
+    .cta:hover,
+    .glow-btn:hover{
+        transform: translateY(-4px) scale(1.03);
+        box-shadow: 0 18px 40px rgba(0,0,0,.3);
+    }
+
+    button:hover::after,
+    a.btn:hover::after,
+    .cta:hover::after,
+    .glow-btn:hover::after{
+        opacity: 1;
+    }
+}
+
+/* Mobile tap */
+@media (hover:none){
+    button::after,
+    a.btn::after,
+    .cta::after,
+    .glow-btn::after{
+        opacity: .35;
+    }
+
+    button:active,
+    a.btn:active,
+    .cta:active,
+    .glow-btn:active{
+        transform: scale(.95);
+    }
+}
+
+/* Animation */
+@keyframes glowBorder{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* Dark mode */
+body.dark-mode button,
+body.dark-mode a.btn,
+body.dark-mode .cta,
+body.dark-mode .glow-btn{
+    background: linear-gradient(135deg,#020617,#0f172a);
+}
+
+        @media (hover: none){
+    .card::before{
+        opacity: 0.4;
+    }
+}
+
+        /* ================= CARD GLOW EFFECT ================= */
+.card{
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Gradient glow layer */
+.card::before{
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(
+        135deg,
+        #ff6a00,
+        #ff1e56,
+        #7f00ff,
+        #00c2ff
+    );
+    opacity: 0;
+    filter: blur(22px);
+    transition: opacity 0.35s ease;
+    z-index: -1;
+}
+
+/* Glow appears on hover */
+.card:hover::before{
+    opacity: 0.9;
+}
+
+/* Smooth lift */
+.card:hover{
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+body.dark-mode .card::before{
+    background: linear-gradient(
+        135deg,
+        #3dd6ff,
+        #7c4dff,
+        #ff6a95,
+        #22d3ee
+    );
+}
+
     :root{
         --bg-main: #f4f7fb;
         --bg-section: #eef2f7;
@@ -527,18 +768,37 @@ body.dark-mode .btn .fa{
 
 <!-- HEADER -->
 <header class="container text-center py-5 mt-5 d-flex flex-column align-items-center" data-aos="fade-down">
-    <!-- Profile image: place a file named `profile.jpg` next to this HTML file to use it -->
-    <img src="WhatsApp Image 2025-07-26 at 7.10.09 PM.jpeg" alt="Profile picture of Loganathan" class="profile-pic mb-3 rounded-circle" onerror="this.onerror=null;this.src='https://via.placeholder.com/140?text=Profile';">
 
-    <h1 class="fw-bold">Loganathan</h1>
-    <h5 class="text-muted">Java Developer</h5>
-    <p class="mt-3">Building scalable backend applications using Java & Spring Boot</p>
+    <!-- Profile image with glow -->
+    <div class="profile-glow">
+        <img src="WhatsApp Image 2025-07-26 at 7.10.09 PM.jpeg"
+             alt="Profile picture of Loganathan"
+             class="profile-pic"
+             onerror="this.onerror=null;this.src='https://via.placeholder.com/140?text=Profile';">
+    </div>
 
-    <a href="R. pdf.pdf" class="btn btn-primary btn-resume mt-3" download>
-        <i class="fa-solid fa-download" aria-hidden="true"></i> Download Resume
-    </a>
-        <a href="#contact" id="hireMeBtn" class="btn btn-hire mt-3 ms-2" aria-label="Hire me"><i class="fa-solid fa-briefcase me-2" aria-hidden="true"></i>Hire Me</a>
+    <!-- Disable AOS for animated text -->
+    <h1 class="fw-bold hero-name" data-aos="none">Loganathan</h1>
+    <h5 class="text-muted hero-role" data-aos="none">Java Developer</h5>
+
+    <p class="mt-3 hero-desc" data-aos="none">
+        Building scalable backend applications using Java & Spring Boot
+    </p>
+
+    <div class="mt-3">
+        <a href="R. pdf.pdf" class="btn btn-primary btn-resume me-2" download>
+            <i class="fa-solid fa-download"></i> Download Resume
+        </a>
+
+        <a href="#contact" id="hireMeBtn" class="btn btn-hire">
+            <i class="fa-solid fa-briefcase me-2"></i>Hire Me
+        </a>
+    </div>
+
 </header>
+
+
+
 
 <!-- ABOUT ME -->
 <section id="about" class="container mb-4" data-aos="fade-up">
@@ -1142,7 +1402,7 @@ body.dark-mode .btn .fa{
             <a href="https://github.com/Logan-hub43" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <i class="fa-brands fa-github"></i>
             </a>
-            <a href="https://www.linkedin.com/in/loganathan-P" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/loganathan." target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
             <a href="https://www.instagram.com/loganisaki" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -1283,7 +1543,20 @@ body.dark-mode .btn .fa{
         document.getElementById("welcomeScreen").style.display = "none";
     }, 2000);
 </script>
+<script>
+document.querySelectorAll('button, a.btn, .cta, .glow-btn')
+.forEach(btn => {
+
+  if (window.matchMedia("(hover:hover)").matches) {
+    btn.addEventListener("mousemove", e => {
+      const r = btn.getBoundingClientRect();
+      btn.style.setProperty('--x', e.clientX - r.left + "px");
+      btn.style.setProperty('--y', e.clientY - r.top + "px");
+    });
+  }
+
+});
+</script>
 
 </body>
 </html>
-
