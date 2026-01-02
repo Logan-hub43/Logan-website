@@ -737,26 +737,18 @@ body.dark-mode .btn .fa{
     z-index: 9999;
 }
 .profile-views{
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    background: rgba(0,0,0,0.45);
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 999px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-    z-index: 10;
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  z-index: 999;
 }
 
-.profile-views i{
-    color: #38bdf8;
-}
 
 </style>
 
@@ -1737,7 +1729,8 @@ document.querySelectorAll('button, a.btn, .cta, .glow-btn')
 });
 </script>
 <script>
-fetch('https://api.countapi.xyz/hit/loganathan-portfolio/views')
+fetch("https://api.countapi.xyz/hit/loganhub43-portfolio/visits")
+
   .then(res => res.json())
   .then(data => {
     document.getElementById('viewCount').innerText = data.value;
@@ -1747,7 +1740,7 @@ fetch('https://api.countapi.xyz/hit/loganathan-portfolio/views')
 
 <script>
 (function () {
-  emailjs.init("ifgJ2RL00EYzUK0cS"); // 🔁 replace with EmailJS public key
+  emailjs.init("ifgJ2RL00EYzUK0cS"); // your public key
 })();
 
 const form = document.getElementById("contact-form");
@@ -1759,37 +1752,40 @@ const statusMsg = document.getElementById("status");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // 🔄 LOADING STATE
+  // 🔄 Loading state
   submitBtn.disabled = true;
   btnText.innerText = "Sending...";
   btnSpinner.classList.remove("d-none");
-  submitBtn.classList.remove("success");
   statusMsg.innerHTML = "";
 
   emailjs.sendForm(
-    "service_cf4u2ej",   // 🔁 replace
-    "template_c9n2lub",  // 🔁 replace
+    "service_cf4u2ej",
+    "template_c9n2lub",
     form
-  ).then(
-    function () {
+  ).then(() => {
 
-      // ✅ SUCCESS UI
-      btnSpinner.classList.add("d-none");
-      btnText.innerText = "Sent";
-      submitBtn.classList.add("success");
+    // ✅ Success UI
+    btnSpinner.classList.add("d-none");
+    btnText.innerText = "Sent";
+    submitBtn.classList.add("success");
 
-      statusMsg.innerHTML =
-        "<span class='text-success'>✔ Message sent successfully!</span>";
+    statusMsg.innerHTML =
+      "<span class='text-success'>✔ Message sent successfully!</span>";
 
-      // 📲 WHATSAPP ALERT
-      const name = form.from_name.value;
-      const email = form.from_email.value;
-      const inquiry = form.inquiry_type.value;
-      const message = form.message.value || "No additional message";
+    // ✅ FINAL & SAFE DATA READ
+    const data = new FormData(form);
 
-      const phoneNumber = "918925175286"; // ✅ your WhatsApp number
+    const name = data.get("from_name") || "N/A";
+    const email = data.get("from_email") || "N/A";
+    const inquiry = data.get("inquiry_type") || "N/A";
+    const message = data.get("message") || "No additional message";
 
-      const whatsappMessage =
+    console.log(name, email, inquiry, message); // DEBUG ONCE
+
+    // 📲 WhatsApp Alert
+    const phoneNumber = "918925175286";
+
+    const whatsappMessage =
 `🔔 New Portfolio Inquiry
 
 Name: ${name}
@@ -1799,30 +1795,78 @@ Requirement: ${inquiry}
 Message:
 ${message}`;
 
-      const whatsappURL =
-        "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(whatsappMessage);
+    window.open(
+      "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(whatsappMessage),
+      "_blank"
+    );
 
-      window.open(whatsappURL, "_blank");
-
-      // 🔁 RESET AFTER DELAY
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        submitBtn.classList.remove("success");
-        btnText.innerText = "Send Message";
-        form.reset();
-      }, 2500);
-    },
-    function (error) {
+    // 🔁 Reset
+    setTimeout(() => {
       submitBtn.disabled = false;
-      btnSpinner.classList.add("d-none");
+      submitBtn.classList.remove("success");
       btnText.innerText = "Send Message";
-      statusMsg.innerHTML =
-        "<span class='text-danger'>❌ Failed to send message. Try again.</span>";
-      console.error(error);
-    }
-  );
+      form.reset();
+    }, 2500);
+
+  }).catch(error => {
+    submitBtn.disabled = false;
+    btnSpinner.classList.add("d-none");
+    btnText.innerText = "Send Message";
+    statusMsg.innerHTML =
+      "<span class='text-danger'>❌ Failed to send message.</span>";
+    console.error(error);
+  });
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  fetch("https://api.countapi.xyz/hit/loganhub43-portfolio-v1/visits")
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("viewCount").innerText = data.value;
+    })
+    .catch(() => {
+      document.getElementById("viewCount").innerText = "—";
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const counterEl = document.getElementById("viewCount");
+  const counterURL =
+    "https://api.countapi.xyz/hit/loganhub43-portfolio-v1/visits";
+
+  fetch(counterURL)
+    .then(res => res.json())
+    .then(data => {
+      animateCount(counterEl, 0, data.value, 1200);
+    })
+    .catch(() => {
+      counterEl.innerText = "—";
+    });
+
+  function animateCount(element, start, end, duration) {
+    let startTime = null;
+
+    function animation(currentTime) {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      const value = Math.floor(progress * (end - start) + start);
+      element.innerText = value;
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
+
+});
+</script>
+
+
 
 </body>
 </html>
