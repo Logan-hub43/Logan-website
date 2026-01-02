@@ -1739,9 +1739,7 @@ fetch("https://api.countapi.xyz/hit/loganhub43-portfolio/visits")
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
-(function () {
-  emailjs.init("ifgJ2RL00EYzUK0cS"); // your public key
-})();
+emailjs.init("ifgJ2RL00EYzUK0cS"); // ✅ your public key
 
 const form = document.getElementById("contact-form");
 const submitBtn = document.getElementById("submitBtn");
@@ -1752,11 +1750,17 @@ const statusMsg = document.getElementById("status");
 form.addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // 🔄 Loading state
   submitBtn.disabled = true;
   btnText.innerText = "Sending...";
   btnSpinner.classList.remove("d-none");
   statusMsg.innerHTML = "";
+
+  // ✅ READ FORM DATA FIRST
+  const data = new FormData(form);
+  const name = data.get("from_name");
+  const email = data.get("from_email");
+  const inquiry = data.get("inquiry_type");
+  const message = data.get("message") || "No additional message";
 
   emailjs.sendForm(
     "service_cf4u2ej",
@@ -1764,28 +1768,14 @@ form.addEventListener("submit", function (e) {
     form
   ).then(() => {
 
-    // ✅ Success UI
     btnSpinner.classList.add("d-none");
     btnText.innerText = "Sent";
-    submitBtn.classList.add("success");
-
     statusMsg.innerHTML =
       "<span class='text-success'>✔ Message sent successfully!</span>";
 
-    // ✅ FINAL & SAFE DATA READ
-    const data = new FormData(form);
-
-    const name = data.get("from_name") || "N/A";
-    const email = data.get("from_email") || "N/A";
-    const inquiry = data.get("inquiry_type") || "N/A";
-    const message = data.get("message") || "No additional message";
-
-    console.log(name, email, inquiry, message); // DEBUG ONCE
-
-    // 📲 WhatsApp Alert
-    const phoneNumber = "918925175286";
-
-    const whatsappMessage =
+    // 📲 WHATSAPP MESSAGE (NOW NOT BLANK)
+    const phone = "918925175286";
+    const whatsappText =
 `🔔 New Portfolio Inquiry
 
 Name: ${name}
@@ -1796,75 +1786,52 @@ Message:
 ${message}`;
 
     window.open(
-      "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(whatsappMessage),
+      "https://wa.me/" + phone + "?text=" + encodeURIComponent(whatsappText),
       "_blank"
     );
-
-    // 🔁 Reset
+     setTimeout(() => {
+      location.href = whatsappURL;
+    }, 300);
     setTimeout(() => {
       submitBtn.disabled = false;
-      submitBtn.classList.remove("success");
       btnText.innerText = "Send Message";
       form.reset();
-    }, 2500);
+    }, 2000);
 
-  }).catch(error => {
+  }).catch(() => {
     submitBtn.disabled = false;
     btnSpinner.classList.add("d-none");
     btnText.innerText = "Send Message";
     statusMsg.innerHTML =
       "<span class='text-danger'>❌ Failed to send message.</span>";
-    console.error(error);
   });
 });
 </script>
+
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  fetch("https://api.countapi.xyz/hit/loganhub43-portfolio-v1/visits")
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("viewCount").innerText = data.value;
-    })
-    .catch(() => {
-      document.getElementById("viewCount").innerText = "—";
-    });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
   const counterEl = document.getElementById("viewCount");
-  const counterURL =
-    "https://api.countapi.xyz/hit/loganhub43-portfolio-v1/visits";
+  const namespace = "loganhub43";
+  const key = "portfolio";
 
-  fetch(counterURL)
+  // ✅ Create counter (only first time)
+  fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`)
+    .catch(() => {}); // ignore if already exists
+
+  // ✅ Increment once per page load
+  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
     .then(res => res.json())
     .then(data => {
-      animateCount(counterEl, 0, data.value, 1200);
+      counterEl.innerText = data.value;
     })
     .catch(() => {
       counterEl.innerText = "—";
     });
 
-  function animateCount(element, start, end, duration) {
-    let startTime = null;
-
-    function animation(currentTime) {
-      if (!startTime) startTime = currentTime;
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const value = Math.floor(progress * (end - start) + start);
-      element.innerText = value;
-
-      if (progress < 1) {
-        requestAnimationFrame(animation);
-      }
-    }
-
-    requestAnimationFrame(animation);
-  }
-
 });
 </script>
+
 
 
 
