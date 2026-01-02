@@ -736,20 +736,6 @@ body.dark-mode .btn .fa{
     font-weight: bold;
     z-index: 9999;
 }
-.profile-views{
-  position: fixed;
-  top: 15px;
-  right: 20px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  z-index: 999;
-}
-
-
 </style>
 
 </head>
@@ -762,13 +748,7 @@ body.dark-mode .btn .fa{
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="#">Loganathan</a>
-<!-- Profile Views Counter -->
-<div class="profile-views">
-  <i class="fa-solid fa-eye"></i>
-  <span id="viewCount">0</span> Profile Views
-</div>
-
+        <a class="navbar-brand fw-bold" href="#">Loganathan</a>c 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#portfolioNav" aria-controls="portfolioNav"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -1808,44 +1788,6 @@ ${message}`;
 });
 </script>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-  const viewEl = document.getElementById("viewCount");
-  const NAMESPACE = "loganhub43";
-  const KEY = "portfolio";
-
-  // If already counted in this browser session → just read value
-  if (sessionStorage.getItem("portfolio_viewed")) {
-
-    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        viewEl.innerText = data.value ?? 0;
-      })
-      .catch(() => {
-        viewEl.innerText = 0;
-      });
-
-  } else {
-
-    // First visit in this session → increment
-    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
-      .then(res => res.json())
-      .then(data => {
-        viewEl.innerText = data.value;
-        sessionStorage.setItem("portfolio_viewed", "true");
-      })
-      .catch(() => {
-        viewEl.innerText = 0;
-      });
-  }
-
-});
-</script>
-
-
-
-
 </body>
 </html>
+
