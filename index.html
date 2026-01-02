@@ -15,6 +15,22 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        /* About Me GIF */
+.about-gif{
+    width: 100%;
+    max-width: 260px;   /* perfect professional size */
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+/* Mobile adjustment */
+@media (max-width: 768px){
+    .about-gif{
+        margin-top: 20px;
+        max-width: 220px;
+    }
+}
+
         /* ================= PROFILE GLOW ================= */
 .profile-glow{
     width: 150px;
@@ -720,6 +736,27 @@ body.dark-mode .btn .fa{
     font-weight: bold;
     z-index: 9999;
 }
+.profile-views{
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    z-index: 10;
+}
+
+.profile-views i{
+    color: #38bdf8;
+}
 
 </style>
 
@@ -734,6 +771,11 @@ body.dark-mode .btn .fa{
 <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
     <div class="container">
         <a class="navbar-brand fw-bold" href="#">Loganathan</a>
+<!-- Profile Views Counter -->
+<div class="profile-views">
+  <i class="fa-solid fa-eye"></i>
+  <span id="viewCount">0</span> Profile Views
+</div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#portfolioNav" aria-controls="portfolioNav"
@@ -802,38 +844,48 @@ body.dark-mode .btn .fa{
 
 <!-- ABOUT ME -->
 <section id="about" class="container mb-4" data-aos="fade-up">
-    <div class="card p-4">
-        <h3 class="section-title">
-            <i class="fa-solid fa-user icon"></i> About Me
-        </h3>
+  <div class="card p-4">
+    <h3 class="section-title">
+      <i class="fa-solid fa-user icon"></i> About Me
+    </h3>
 
+    <div class="row align-items-center">
+      
+      <!-- Text Content -->
+      <div class="col-lg-8">
         <p>
-            I am a motivated Java Developer with a Bachelor’s degree in
-            Electronics & Communication Engineering (ECE) and a strong passion
-            for software development and backend technologies.
+          I am a motivated Java Developer with a Bachelor’s degree in
+          Electronics & Communication Engineering (ECE) and a strong passion
+          for software development and backend technologies.
         </p>
 
         <p>
-            I have hands-on experience with Core Java, Java 8, Collections,
-            JDBC, MySQL, and Spring Boot fundamentals. I enjoy writing clean,
-            efficient code and applying object-oriented principles to solve
-            real-world problems.
+          I have hands-on experience with Core Java, Java 8, Collections,
+          JDBC, MySQL, and Spring Boot fundamentals. I enjoy writing clean,
+          efficient code and applying object-oriented principles to solve
+          real-world problems.
         </p>
 
         <p>
-            My engineering background has strengthened my analytical thinking,
-            debugging ability, and problem-solving skills. I have worked on
-            Java-based and web-based projects that provided practical exposure
-            to backend and frontend development.
+          I am actively seeking an entry-level Java Developer role where I
+          can apply my skills, learn industry best practices, and grow as a
+          professional software developer.
         </p>
+      </div>
 
-        <p>
-            I am actively seeking an entry-level Java Developer role where I
-            can apply my skills, learn industry best practices, and grow as a
-            professional software developer.
-        </p>
+      <!-- GIF Image -->
+      <div class="col-lg-4 text-center">
+        <img 
+          src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif"
+          alt="Developer working animation"
+          class="about-gif"
+        />
+      </div>
+
     </div>
+  </div>
 </section>
+
 <!-- LANGUAGES -->
 <section id="languages" class="container mb-4" data-aos="fade-up">
     <div class="card p-4">
@@ -986,7 +1038,7 @@ body.dark-mode .btn .fa{
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front card p-3 h-100">
-                        <h5>Library Management System</h5>
+                        <h5>📚Library Management System</h5>
                         <p class="text-muted">Core Java | Collections</p>
                         <p>Console-based system to manage books and borrowing operations.</p>
                         <ul>
@@ -995,7 +1047,7 @@ body.dark-mode .btn .fa{
                         </ul>
                     </div>
                     <div class="flip-card-back card p-3 h-100">
-                        <h5 class="fw-bold">Tools & Tech</h5>
+                        <h5 class="fw-bold">🧑‍💻Tools & Tech</h5>
                         <p class="mb-2 text-muted">Used in this project:</p>
                         <div class="d-flex flex-column gap-2">
                             <div><i class="fa-brands fa-java me-2" aria-hidden="true"></i>Core Java</div>
@@ -1011,7 +1063,7 @@ body.dark-mode .btn .fa{
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front card p-3 h-100">
-                        <h5>Student Registration System</h5>
+                        <h5>👩‍🦰🧑Student Registration System</h5>
                         <p class="text-muted">Spring Boot | Thymeleaf</p>
                         <p>Web-based registration system following MVC architecture.</p>
                         <ul>
@@ -1020,7 +1072,7 @@ body.dark-mode .btn .fa{
                         </ul>
                     </div>
                     <div class="flip-card-back card p-3 h-100">
-                        <h5 class="fw-bold">Tools & Tech</h5>
+                        <h5 class="fw-bold">🧑‍💻Tools & Tech</h5>
                         <p class="mb-2 text-muted">Used in this project:</p>
                         <div class="d-flex flex-column gap-2">
                             <div><i class="fa-brands fa-java me-2" aria-hidden="true"></i>Spring Boot</div>
@@ -1036,7 +1088,7 @@ body.dark-mode .btn .fa{
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front card p-3 h-100">
-                        <h5>EV Car Website</h5>
+                        <h5>🚗EV Car Website</h5>
                         <p class="text-muted">ReactJS | API | EmailJS</p>
                         <p>Responsive EV website with API integration and email support.</p>
                         <ul>
@@ -1045,7 +1097,7 @@ body.dark-mode .btn .fa{
                         </ul>
                     </div>
                     <div class="flip-card-back card p-3 h-100">
-                        <h5 class="fw-bold">Tools & Tech</h5>
+                        <h5 class="fw-bold">🧑‍💻Tools & Tech</h5>
                         <p class="mb-2 text-muted">Used in this project:</p>
                         <div class="d-flex flex-column gap-2">
                             <div><i class="fa-brands fa-react me-2" aria-hidden="true"></i>ReactJS</div>
@@ -1067,7 +1119,7 @@ body.dark-mode .btn .fa{
         </h3>
 
         <h5 class="fw-bold">
-            Bachelor of Engineering (B.E.) — Electronics & Communication Engineering
+           👨🏻‍🎓 Bachelor of Engineering (B.E.) — Electronics & Communication Engineering
         </h5>
         <p><b>Year of Graduation:</b> 2025</p>
 
@@ -1087,7 +1139,7 @@ body.dark-mode .btn .fa{
 
         <hr>
 
-        <h5 class="fw-bold mt-3">Higher Secondary Education</h5>
+        <h5 class="fw-bold mt-3">👨🏻‍💻Higher Secondary Education</h5>
         <p class="mb-1"><strong>School:</strong> K.C. Sankaralinga Nadar Hr. Sec. School</p>
 
         <div class="row">
@@ -1340,60 +1392,141 @@ body.dark-mode .btn .fa{
 
 <!-- CONTACT -->
 <section id="contact" class="container mb-5" data-aos="fade-up">
-    <div class="card p-4">
-    <h3 class="section-title"><i class="fa-solid fa-envelope icon" aria-hidden="true"></i> Contact Me</h3>
+  <div class="card p-4">
+    <h3 class="section-title">
+      <i class="fa-solid fa-envelope icon" aria-hidden="true"></i> Contact Me
+    </h3>
 
-        <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="contact-item">
-                    <div class="contact-icon animate phone" aria-hidden="true"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
-                    <div>
-                        <div class="fw-bold">Mobile</div>
-                        <a href="tel:8925175286" class="text-decoration-none">+91 89251 75286</a>
-                    </div>
-                </div>
+    <div class="row">
+      <!-- LEFT: CONTACT DETAILS -->
+      <div class="col-md-4 mb-3">
 
-                <div class="contact-item">
-                    <div class="contact-icon animate email" aria-hidden="true"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
-                    <div>
-                        <div class="fw-bold">Email</div>
-                        <a href="mailto:loganisali2345@gmail.com" class="text-decoration-none">loganisali2345@gmail.com</a>
-                    </div>
-                </div>
-
-                <div class="contact-item">
-                    <div class="contact-icon animate location" aria-hidden="true"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
-                    <div>
-                        <div class="fw-bold">Location</div>
-                        <div class="text-muted">Chennai, Tamil Nadu, India</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8">
-                <form id="contact-form">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <input class="form-control" name="from_name" placeholder="Your Name" required>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input class="form-control" name="from_email" type="email" placeholder="Your Email" required>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <button class="btn btn-primary me-3" type="submit">Send Message</button>
-                        <a href="tel:8925175286" class="btn btn-outline-secondary" aria-label="Call me"><i class="fa-solid fa-phone me-2"></i>Call</a>
-                        <a href="#hireMeBtn" class="btn btn-hire ms-3" aria-label="Hire me quick">Hire Me</a>
-                    </div>
-                    <p id="status" class="mt-3"></p>
-                </form>
-            </div>
+        <div class="contact-item">
+          <div class="contact-icon animate phone" aria-hidden="true">
+            <i class="fa-solid fa-phone"></i>
+          </div>
+          <div>
+            <div class="fw-bold">Mobile</div>
+            <a href="tel:8925175286" class="text-decoration-none">
+              +91 89251 75286
+            </a>
+          </div>
         </div>
+
+        <div class="contact-item">
+          <div class="contact-icon animate email" aria-hidden="true">
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div>
+            <div class="fw-bold">Email</div>
+            <a href="mailto:loganisaki2345@gmail.com" class="text-decoration-none">
+              loganisaki2345@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon animate location" aria-hidden="true">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div>
+            <div class="fw-bold">Location</div>
+            <div class="text-muted">Chennai, Tamil Nadu, India</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: CONTACT FORM -->
+      <div class="col-md-8">
+        <form id="contact-form">
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <input 
+                class="form-control" 
+                name="from_name" 
+                placeholder="Your Name" 
+                required>
+            </div>
+
+            <div class="col-md-6 mb-3">
+              <input 
+                class="form-control" 
+                name="from_email" 
+                type="email" 
+                placeholder="Your Email" 
+                required>
+            </div>
+          </div>
+
+          <!-- DROPDOWN WITH ARROW -->
+          <div class="mb-3">
+            <select class="form-select" name="inquiry_type" required>
+              <option value="" disabled selected>
+                🔽 Select your requirement
+              </option>
+              <option value="Java Developer">
+                ☕ Java Developer
+              </option>
+              <option value="Backend Developer">
+                🛠️ Backend Developer
+              </option>
+              <option value="Spring Boot Project">
+                🚀 Spring Boot Project
+              </option>
+            </select>
+          </div>
+
+          <!-- OPTIONAL MESSAGE -->
+          <div class="mb-3">
+            <textarea 
+              class="form-control" 
+              name="message" 
+              rows="4" 
+              placeholder="Additional message (optional)">
+            </textarea>
+          </div>
+
+          <!-- ACTION BUTTONS -->
+          <div class="d-flex align-items-center flex-wrap">
+            <button class="btn btn-primary me-3 mb-2" type="submit" id="submitBtn">
+  <span id="btnText">Send Message</span>
+  <span id="btnSpinner"
+        class="spinner-border spinner-border-sm ms-2 d-none"
+        role="status"
+        aria-hidden="true"></span>
+</button>
+
+
+            <a href="tel:8925175286" 
+               class="btn btn-outline-secondary me-3 mb-2" 
+               aria-label="Call me">
+              <i class="fa-solid fa-phone me-2"></i>Call
+            </a>
+
+            <a href="#hireMeBtn" 
+               class="btn btn-hire mb-2" 
+               aria-label="Hire me quick">
+              Hire Me
+            </a>
+            <a href="#" 
+   class="btn btn-success ms-3 mb-2" 
+   id="whatsappBtn"
+   aria-label="WhatsApp me">
+  <i class="fa-brands fa-whatsapp me-2"></i>WhatsApp
+</a>
+
+          </div>
+
+          <p id="status" class="mt-3"></p>
+
+        </form>
+      </div>
     </div>
+  </div>
 </section>
+
 
 <footer class="text-center text-muted py-4 footer">
     <div class="container">
@@ -1413,6 +1546,39 @@ body.dark-mode .btn .fa{
         <div>© 2025 Loganathan | Java Developer</div>
     </div>
 </footer>
+<!-- RUNNING MARQUEE FOOTER -->
+<div class="footer-marquee">
+  <marquee behavior="scroll" direction="left" scrollamount="6">
+
+    💻 Java Developer |
+    🚀 Spring Boot |
+    🗄️ MySQL |
+    ☕ Core Java |
+    📦 JDBC |
+    🧠 OOPs |
+    🧩 Collections |
+    🌐 REST API |
+    🛠️ Git & GitHub |
+    🎨 HTML • CSS • Bootstrap |
+    
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    
+    📌 Projects:
+    Automated Helmet Detection System |
+    Student Management System |
+    Java CRUD Application |
+    Portfolio Website |
+    
+    &nbsp;&nbsp;|&nbsp;&nbsp;
+    
+    👨‍💻 Loganathan |
+    📧 loganisaki2345@gmail.com |
+    🔗 github.com/Loganhub-43 |
+    📞 Phone-8925175286 |
+    📍 Chennai,Tamilnadu-India
+
+  </marquee>
+</div>
 
 <!-- Additional dark-mode fixes (ensure readable text) -->
 <style>
@@ -1464,6 +1630,19 @@ body.dark-mode .btn .fa{
     body.dark-mode .flip-card .fa-solid {
         color: #84b7ff !important;
     }
+.footer-marquee{
+    margin-top: 40px;
+    padding: 12px 0;
+    background: linear-gradient(90deg, #0f172a, #020617);
+    color: #e5e7eb;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-marquee marquee{
+    white-space: nowrap;
+}
 
 </style>
 
@@ -1555,6 +1734,93 @@ document.querySelectorAll('button, a.btn, .cta, .glow-btn')
     });
   }
 
+});
+</script>
+<script>
+fetch('https://api.countapi.xyz/hit/loganathan-portfolio/views')
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('viewCount').innerText = data.value;
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+(function () {
+  emailjs.init("ifgJ2RL00EYzUK0cS"); // 🔁 replace with EmailJS public key
+})();
+
+const form = document.getElementById("contact-form");
+const submitBtn = document.getElementById("submitBtn");
+const btnText = document.getElementById("btnText");
+const btnSpinner = document.getElementById("btnSpinner");
+const statusMsg = document.getElementById("status");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  // 🔄 LOADING STATE
+  submitBtn.disabled = true;
+  btnText.innerText = "Sending...";
+  btnSpinner.classList.remove("d-none");
+  submitBtn.classList.remove("success");
+  statusMsg.innerHTML = "";
+
+  emailjs.sendForm(
+    "service_cf4u2ej",   // 🔁 replace
+    "template_c9n2lub",  // 🔁 replace
+    form
+  ).then(
+    function () {
+
+      // ✅ SUCCESS UI
+      btnSpinner.classList.add("d-none");
+      btnText.innerText = "Sent";
+      submitBtn.classList.add("success");
+
+      statusMsg.innerHTML =
+        "<span class='text-success'>✔ Message sent successfully!</span>";
+
+      // 📲 WHATSAPP ALERT
+      const name = form.from_name.value;
+      const email = form.from_email.value;
+      const inquiry = form.inquiry_type.value;
+      const message = form.message.value || "No additional message";
+
+      const phoneNumber = "918925175286"; // ✅ your WhatsApp number
+
+      const whatsappMessage =
+`🔔 New Portfolio Inquiry
+
+Name: ${name}
+Email: ${email}
+Requirement: ${inquiry}
+
+Message:
+${message}`;
+
+      const whatsappURL =
+        "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(whatsappMessage);
+
+      window.open(whatsappURL, "_blank");
+
+      // 🔁 RESET AFTER DELAY
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove("success");
+        btnText.innerText = "Send Message";
+        form.reset();
+      }, 2500);
+    },
+    function (error) {
+      submitBtn.disabled = false;
+      btnSpinner.classList.add("d-none");
+      btnText.innerText = "Send Message";
+      statusMsg.innerHTML =
+        "<span class='text-danger'>❌ Failed to send message. Try again.</span>";
+      console.error(error);
+    }
+  );
 });
 </script>
 
