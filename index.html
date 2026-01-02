@@ -1502,7 +1502,7 @@ body.dark-mode .btn .fa{
                aria-label="Hire me quick">
               Hire Me
             </a>
-            <a href="#" 
+            <a href="https://wa.me/918925175286" 
    class="btn btn-success ms-3 mb-2" 
    id="whatsappBtn"
    aria-label="WhatsApp me">
@@ -1809,25 +1809,37 @@ ${message}`;
 </script>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-  const counterEl = document.getElementById("viewCount");
-  const namespace = "loganhub43";
-  const key = "portfolio";
+  const viewEl = document.getElementById("viewCount");
+  const NAMESPACE = "loganhub43";
+  const KEY = "portfolio";
 
-  // ✅ Create counter (only first time)
-  fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=${key}&value=0`)
-    .catch(() => {}); // ignore if already exists
+  // If already counted in this browser session → just read value
+  if (sessionStorage.getItem("portfolio_viewed")) {
 
-  // ✅ Increment once per page load
-  fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
-    .then(res => res.json())
-    .then(data => {
-      counterEl.innerText = data.value;
-    })
-    .catch(() => {
-      counterEl.innerText = "—";
-    });
+    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        viewEl.innerText = data.value ?? 0;
+      })
+      .catch(() => {
+        viewEl.innerText = 0;
+      });
+
+  } else {
+
+    // First visit in this session → increment
+    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        viewEl.innerText = data.value;
+        sessionStorage.setItem("portfolio_viewed", "true");
+      })
+      .catch(() => {
+        viewEl.innerText = 0;
+      });
+  }
 
 });
 </script>
