@@ -15,6 +15,78 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        /* ================= EXPERIENCE TIMELINE ================= */
+.experience-timeline{
+    position: relative;
+    padding-left: 40px;
+}
+
+.experience-timeline::before{
+    content: "";
+    position: absolute;
+    left: 14px;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg,#0d6efd,#22d3ee);
+    border-radius: 10px;
+}
+
+.timeline-item{
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-dot{
+    position: absolute;
+    left: -32px;
+    top: 20px;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg,#0d6efd,#22d3ee);
+    border-radius: 50%;
+    box-shadow: 0 0 0 6px rgba(13,110,253,0.15);
+}
+
+body.dark-mode .experience-timeline::before{
+    background: linear-gradient(180deg,#7c4dff,#22d3ee);
+}
+
+body.dark-mode .timeline-dot{
+    background: linear-gradient(135deg,#7c4dff,#22d3ee);
+}
+
+        /* ===== EXPERIENCE ICON CARDS ===== */
+.exp-icon-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 14px;
+}
+
+.exp-icon-card{
+    background: rgba(255,255,255,0.9);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 10px 24px rgba(2,6,23,0.08);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.exp-icon-card i{
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.exp-icon-card:hover{
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(2,6,23,0.15);
+}
+
+body.dark-mode .exp-icon-card{
+    background: #0f172a;
+}
+
         /* About Me GIF */
 .about-gif{
     width: 100%;
@@ -762,6 +834,7 @@ body.dark-mode .btn .fa{
                 <li class="nav-item"><a class="nav-link" href="#languages">Languages</a></li>
                 <li class="nav-item"><a class="nav-link" href="#tools">Tools</a></li>
                 <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+                <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
                 <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -999,6 +1072,182 @@ body.dark-mode .btn .fa{
 
     </div>
 </section>
+<!-- EXPERIENCE -->
+<section id="experience" class="container mb-5" data-aos="fade-up">
+    <h3 class="section-title">
+        <i class="fa-solid fa-briefcase icon"></i> Experience
+    </h3>
+
+    <div class="experience-timeline">
+
+        <div class="timeline-item" data-aos="fade-right">
+            <span class="timeline-dot"></span>
+
+            <div class="card p-4">
+
+                <div class="d-flex justify-content-between flex-wrap mb-2">
+                    <h5 class="fw-bold mb-0">Java Full Stack Training</h5>
+                    <span class="badge bg-primary">Training</span>
+                </div>
+
+                <p class="text-muted mb-3">Pumo Technovation</p>
+
+                <p>
+                    Hands-on experience in full stack development focusing on Java backend,
+                    REST API development, database integration, and responsive UI design.
+                </p>
+
+                <!-- RESPONSIBILITIES -->
+                <h6 class="fw-bold mt-4">🔑 Key Responsibilities</h6>
+                <div class="exp-icon-grid">
+
+                    <div class="exp-icon-card">
+                        <i class="fa-brands fa-java text-danger"></i>
+                        <h6 class="fw-bold">Java & Spring Boot</h6>
+                        <p class="small text-muted">
+                            Backend development using Core Java and Spring Boot.
+                        </p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-code-branch text-primary"></i>
+                        <h6 class="fw-bold">REST APIs</h6>
+                        <p class="small text-muted">
+                            Designed CRUD-based RESTful APIs.
+                        </p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-database text-info"></i>
+                        <h6 class="fw-bold">MySQL Integration</h6>
+                        <p class="small text-muted">
+                            Database design and JDBC/JPA connectivity.
+                        </p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-paper-plane text-warning"></i>
+                        <h6 class="fw-bold">API Testing</h6>
+                        <p class="small text-muted">
+                            Tested and validated APIs using Postman.
+                        </p>
+                    </div>
+                    
+                    <div class="exp-icon-card">
+        <i class="fa-brands fa-react text-info"></i>
+        <h6 class="fw-bold">ReactJS UI Development</h6>
+        <p class="small text-muted">
+            Built responsive UI components using ReactJS and integrated REST APIs.
+        </p>
+    </div>
+
+    <div class="exp-icon-card">
+        <i class="fa-brands fa-github text-dark"></i>
+        <h6 class="fw-bold">Version Control</h6>
+        <p class="small text-muted">
+            Managed code using Git & GitHub with team collaboration.
+        </p>
+    </div>
+
+                </div>
+            <!-- REACTJS PROJECT (UNDER EXPERIENCE) -->
+<h6 class="fw-bold mt-4">⚛️ ReactJS Project</h6>
+
+<div class="exp-icon-grid">
+
+    <div class="exp-icon-card">
+        <i class="fa-brands fa-react text-info"></i>
+        <h6 class="fw-bold">EV Car Website</h6>
+        <p class="small text-muted">
+            Developed a responsive multi-page ReactJS application showcasing
+            electric vehicles with API integration and interactive UI.
+        </p>
+    </div>
+
+    <div class="exp-icon-card">
+        <i class="fa-solid fa-code-branch text-primary"></i>
+        <h6 class="fw-bold">API Integration</h6>
+        <p class="small text-muted">
+            Integrated REST APIs using Fetch/Axios to dynamically load vehicle data.
+        </p>
+    </div>
+
+    <div class="exp-icon-card">
+        <i class="fa-solid fa-envelope text-warning"></i>
+        <h6 class="fw-bold">EmailJS</h6>
+        <p class="small text-muted">
+            Implemented EmailJS for contact and inquiry forms without backend services.
+        </p>
+    </div>
+
+</div>
+
+                <!-- PROJECTS -->
+                <h6 class="fw-bold mt-4">🚀Java Projects & Hands-on Work</h6>
+                <div class="exp-icon-grid">
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-user-graduate text-success"></i>
+                        <h6 class="fw-bold">Student Management System</h6>
+                        <p class="small text-muted">
+                            Spring Boot + MySQL web application with CRUD features.
+                        </p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-list-check text-primary"></i>
+                        <h6 class="fw-bold">Java CRUD App</h6>
+                        <p class="small text-muted">
+                            Core Java & JDBC-based data management system.
+                        </p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-plug text-info"></i>
+                        <h6 class="fw-bold">REST API Development</h6>
+                        <p class="small text-muted">
+                            Built and tested multiple REST endpoints.
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- TECHNOLOGIES -->
+                <h6 class="fw-bold mt-4">🧰 Technologies Used</h6>
+                <div class="exp-icon-grid">
+
+                    <div class="exp-icon-card">
+                        <i class="fa-brands fa-java text-danger"></i>
+                        <p class="fw-bold mb-0">Java</p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-leaf text-success"></i>
+                        <p class="fw-bold mb-0">Spring Boot</p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-database text-info"></i>
+                        <p class="fw-bold mb-0">MySQL</p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-solid fa-paper-plane text-warning"></i>
+                        <p class="fw-bold mb-0">Postman</p>
+                    </div>
+
+                    <div class="exp-icon-card">
+                        <i class="fa-brands fa-github text-dark"></i>
+                        <p class="fw-bold mb-0">Git & GitHub</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
 
 
 <!-- PROJECTS -->
@@ -1080,7 +1329,43 @@ body.dark-mode .btn .fa{
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            
+            <!-- FRONT -->
+            <div class="flip-card-front card p-3 h-100">
+                <h5>🌐 Personal Portfolio Website</h5>
+                <p class="text-muted">HTML | CSS | Bootstrap | JavaScript</p>
+                <p>
+                    A responsive personal portfolio website to showcase my skills,
+                    projects, experience, and contact details.
+                </p>
+                <ul>
+                    <li>Modern UI with animations</li>
+                    <li>Dark mode & interactive effects</li>
+                </ul>
+            </div>
+
+            <!-- BACK -->
+            <div class="flip-card-back card p-3 h-100">
+                <h5 class="fw-bold">🧑‍💻 Tools & Tech</h5>
+                <p class="mb-2 text-muted">Used in this project:</p>
+                <div class="d-flex flex-column gap-2">
+                    <div><i class="fa-brands fa-html5 me-2 text-danger"></i>HTML5</div>
+                    <div><i class="fa-brands fa-css3-alt me-2 text-primary"></i>CSS3</div>
+                    <div><i class="fa-brands fa-bootstrap me-2 text-purple"></i>Bootstrap</div>
+                    <div><i class="fa-brands fa-js me-2 text-warning"></i>JavaScript</div>
+                    <div><i class="fa-brands fa-github me-2"></i>GitHub Pages</div>
+                </div>
+            </div>
+
+        </div>
     </div>
+</div>
+
+        </div>
+        
 </section>
 
 <!-- EDUCATION -->
@@ -1201,6 +1486,17 @@ body.dark-mode .btn .fa{
                 </p>
             </div>
         </div>
+        <!-- Added: Postman -->
+   <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="600">
+    <div class="card h-100 text-center p-4">
+        <i class="fa-solid fa-paper-plane fa-3x text-warning mb-3"></i>
+        <h5 class="fw-bold">Postman</h5>
+        <p>
+            Used for testing, debugging, and documenting RESTful APIs including
+            request validation, headers, authentication, and response analysis.
+        </p>
+    </div>
+   </div>
 
     </div>
 </section>
@@ -1788,7 +2084,44 @@ ${message}`;
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const viewEl = document.getElementById("viewCount");
+  const NAMESPACE = "loganhub43";
+  const KEY = "portfolio";
+
+  // If already counted in this browser session → just read value
+  if (sessionStorage.getItem("portfolio_viewed")) {
+
+    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        viewEl.innerText = data.value ?? 0;
+      })
+      .catch(() => {
+        viewEl.innerText = 0;
+      });
+
+  } else {
+
+    // First visit in this session → increment
+    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        viewEl.innerText = data.value;
+        sessionStorage.setItem("portfolio_viewed", "true");
+      })
+      .catch(() => {
+        viewEl.innerText = 0;
+      });
+  }
+
+});
+</script>
+
+
+
+
 </body>
 </html>
-
-
